@@ -1,4 +1,4 @@
 # Youtube Email Crawler
-    - Total Channels with emails: 724
-    - Total Channels Scraped: 64999
+    - Total Channels with emails: 727
+    - Total Channels Scraped: 65624
    
