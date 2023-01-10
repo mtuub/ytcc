@@ -1,4 +1,4 @@
 {
-    "maxCrawlIterations": 100,
+    "maxCrawlIterations": 200,
     "workers": 10
 }

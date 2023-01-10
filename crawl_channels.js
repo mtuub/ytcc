@@ -1,6 +1,6 @@
 const { readFile } = require("fs/promises");
 const randomWord = require("random-word");
-const { getRandomFromArray } = require("./utils");
+const { getRandomFromArray, sleep, getRandomNumber } = require("./utils");
 const { getSearchedVideosIds, getSuggestedVideosAndChannels } = require("./yt");
 const fs = require("fs/promises");
 
@@ -30,7 +30,9 @@ const fs = require("fs/promises");
     "utf8"
   );
 
-  console.log(`Crawl completed! ${channelIds.length} channel ids found!`);
+  console.log(
+    `Crawl completed! ${unvisitedChannelIds.length} channel ids found!`
+  );
 })();
 
 async function crawlChannelIds(maxIterations, startWord) {
@@ -63,6 +65,7 @@ async function crawlChannelIds(maxIterations, startWord) {
     } catch (error) {
       console.log(`Crawl Iteration ${iteration} failed!`, error.message);
     }
+    await sleep(getRandomNumber(100, 500));
   }
 
   return channelIds;

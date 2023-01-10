@@ -1,5 +1,6 @@
 const { readFile } = require("fs/promises");
 const fs = require("fs/promises");
+const { sleep, getRandomNumber } = require("./utils");
 const { getChannelInfo } = require("./yt");
 
 let new_channels_with_emails = [];
@@ -72,6 +73,7 @@ async function getEmailsFromChannelIds() {
         error.message
       );
     }
+    await sleep(getRandomNumber(100, 500));
   }
 
   console.log(`Total emails found: ${totalEmails} / ${channelsIds.length}`);

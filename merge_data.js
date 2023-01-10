@@ -78,11 +78,11 @@ const fs = require("fs/promises");
   );
 
   // update readme.md
-  const readme_data = `# Youtube Email Crawler
-    - Total Channels with emails: ${
+  const readme_data = `# YT Crawler
+    - Emails: ${
       [...unique_new_channels, ...existing_channels_with_emails].length
     }
-    - Total Channels Scraped: ${
+    - Crawled: ${
       [...shared_data.channel_ids, ...existing_visited_channels_ids].length
     }
    `;
