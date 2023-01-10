@@ -12,8 +12,15 @@ const fs = require("fs/promises");
     startWord
   );
 
+  const visitedChannelIds = JSON.parse(
+    await readFile("data/visited_channels_ids.json", "utf-8")
+  );
+  const unvisitedChannelIds = channelIds.filter(
+    (x) => !visitedChannelIds.includes(x)
+  );
+
   const artifact_data = {
-    channel_ids: channelIds,
+    channel_ids: unvisitedChannelIds,
     startWord,
   };
 
