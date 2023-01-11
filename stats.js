@@ -1,6 +1,9 @@
 const fs = require("fs/promises");
 
 (async () => {
+  const emailed_channel_ids = JSON.parse(
+    await fs.readFile("data/emailed_channels_ids.json", "utf-8")
+  );
   const channel_email_datas = JSON.parse(
     await fs.readFile("data/channels_with_emails.json", "utf-8")
   );
@@ -39,15 +42,21 @@ const fs = require("fs/promises");
         channel.subscribers < ranges[idx + 1]
     );
     // update stats
-    stats[ranges[idx]] = result.length;
+    stats[ranges[idx]] = { channels: result, count: result.length };
   }
-  console.log(stats);
 
-  let table = "| Subscriber Range  | Channel Count |\n|-------|-------|\n";
+  let table =
+    "| Subscriber Range  | Already Emailed | Not Emailed |\n|-------|-------|-------|\n";
   const keys = Object.keys(stats);
 
   for (let i = 0; i < keys.length - 1; i++) {
-    table += `| ${keys[i]} - ${keys[i + 1]} | ${stats[keys[i]]} |\n`;
+    const already_emailed = stats[keys[i]].channels.filter((channel) =>
+      emailed_channel_ids.includes(channel.id)
+    );
+
+    table += `| ${keys[i]} - ${keys[i + 1]} | ${already_emailed.length} | ${
+      stats[keys[i]].count - already_emailed.length
+    } |\n`;
   }
 
   readme_data += "\n# Stats\n" + table;
