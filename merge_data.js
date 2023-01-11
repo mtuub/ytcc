@@ -49,12 +49,19 @@ const fs = require("fs/promises");
       (item, index) => merged_data.findIndex((i) => i.id === item.id) === index
     );
 
+    const final_new_channels = [
+      ...unique_new_channels,
+      ...existing_channels_with_emails,
+    ];
+
+    const unique_final_new_channels = final_new_channels.filter(
+      (item, index) =>
+        final_new_channels.findIndex((i) => i.id === item.id) === index
+    );
+
     await fs.writeFile(
       "data/channels_with_emails.json",
-      JSON.stringify([
-        ...unique_new_channels,
-        ...existing_channels_with_emails,
-      ]),
+      JSON.stringify(unique_final_new_channels),
       "utf8"
     );
   }
@@ -76,16 +83,4 @@ const fs = require("fs/promises");
     JSON.stringify([log_data, ...existing_log_data]),
     "utf8"
   );
-
-  // update readme.md
-  const readme_data = `# YT Crawler
-    - Emails: ${
-      [...unique_new_channels, ...existing_channels_with_emails].length
-    }
-    - Crawled: ${
-      [...shared_data.channel_ids, ...existing_visited_channels_ids].length
-    }
-   `;
-
-  await fs.writeFile("README.md", readme_data, "utf8");
 })();
