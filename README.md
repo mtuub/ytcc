@@ -1,4 +1,4 @@
 # YT Crawler
-    - Emails: 851
-    - Crawled: 42602
+    - Emails: 862
+    - Crawled: 43197
    
