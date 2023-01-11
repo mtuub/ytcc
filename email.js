@@ -1,8 +1,8 @@
 const fs = require("fs/promises");
 
 const limit = 49;
-const start_count = 25000;
-const end_count = 35000;
+const start_count = 35000;
+const end_count = 50000;
 
 (async () => {
   const channel_email_datas = JSON.parse(
