@@ -1,8 +1,8 @@
 name: Crawler
 
 on:
-  push:
-    branches: master
+  # push:
+  #   branches: master
   schedule:
     - cron: "*/30 * * * *" # every 30 minutes
 jobs:
