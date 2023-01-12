@@ -1,4 +1,5 @@
 const fs = require("fs/promises");
+const { verifyEmail } = require("./utils");
 
 const limit = 49;
 const start_count = 35000;
@@ -17,14 +18,20 @@ const end_count = 50000;
     .filter((c) => !already_emailed_channels.includes(c.id))
     .slice(0, limit);
 
+  let total_valid = 0;
   if (selected_channels.length > 0) {
     let csv = "email,channel_name,subscriber_count\n";
 
     for (let idx = 0; idx < selected_channels.length; idx++) {
       const channel = selected_channels[idx];
-      csv += `${channel.email},${channel.name.replace("\\u0026", "&")},${
-        channel.subscribers
-      }\n`;
+
+      const isValidEmail = await verifyEmail(channel.email);
+      if (isValidEmail) {
+        total_valid++;
+        csv += `${channel.email},${channel.name.replace("\\u0026", "&")},${
+          channel.subscribers
+        }\n`;
+      }
     }
 
     await fs.writeFile(
@@ -45,5 +52,5 @@ const end_count = 50000;
     );
   }
 
-  console.log(`Total found: ${selected_channels.length}`);
+  console.log(`Total valid found: ${total_valid}`);
 })();

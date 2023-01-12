@@ -1,4 +1,5 @@
 const moment = require("moment/moment");
+const axios = require("axios");
 
 function getRandomFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
@@ -47,6 +48,20 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+async function verifyEmail(email) {
+  const response = await axios.post(
+    "https://check.emailverifier.online/bulk-verify-email/functions/quick_mail_verify_no_session.php",
+    { email },
+    {
+      headers: {
+        "user-agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    }
+  );
+  return response.data.status === "valid";
+}
 module.exports = {
   getRandomFromArray,
   extractEmailFromString,
@@ -54,4 +69,5 @@ module.exports = {
   convertSubscriberCountToNumber,
   sleep,
   getRandomNumber,
+  verifyEmail,
 };
