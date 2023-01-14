@@ -1,9 +1,9 @@
 const fs = require("fs/promises");
 const { verifyEmail } = require("./utils");
 
-const limit = 49;
-const start_count = 35000;
-const end_count = 50000;
+const limit = 25;
+const start_count = 50000;
+const end_count = 75000;
 
 (async () => {
   const channel_email_datas = JSON.parse(
@@ -31,6 +31,7 @@ const end_count = 50000;
         csv += `${channel.email},${channel.name.replace("\\u0026", "&")},${
           channel.subscribers
         }\n`;
+        console.log(`Valid emails: ${total_valid}/${selected_channels.length}`);
       }
     }
 
