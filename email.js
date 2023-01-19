@@ -1,9 +1,9 @@
 const fs = require("fs/promises");
 const { verifyEmail } = require("./utils");
 
-const limit = 12;
-const start_count = 100000;
-const end_count = 300000;
+const limit = 55;
+const start_count = 75000;
+const end_count = 100000;
 
 (async () => {
   const channel_email_datas = JSON.parse(
