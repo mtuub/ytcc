@@ -1,11 +1,11 @@
 # YT Crawler
-- Emails: 9266
-- Crawled: 446011
+- Emails: 9267
+- Crawled: 446080
 
 # Stats
 | Subscriber Range  | Already Emailed | Not Emailed |
 |-------|-------|-------|
-| 5000 - 15000 | 0 | 2277 |
+| 5000 - 15000 | 0 | 2278 |
 | 15000 - 25000 | 0 | 1058 |
 | 25000 - 35000 | 47 | 635 |
 | 35000 - 50000 | 148 | 563 |
